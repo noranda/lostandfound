@@ -20,8 +20,8 @@
     <%= f.text_field :description, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :toy_type %><br>
-    <%= f.text_field :toy_type, class: "form-control" %>
+    <%= f.label :toy_type_id %><br>
+    <%= f.select :toy_type_id, @toy_types.map { |t| [t.title, t.id] }, {}, class: "form-control" %>
   </div>
   <div class="form-group">
     <%= f.submit nil, class: "btn btn-success" %>

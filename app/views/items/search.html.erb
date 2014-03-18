@@ -5,7 +5,12 @@
         <h1>Search</h1>
       </div>
 
-      <%= search_form_for(@search, url: search_items_path) do |f| %>
+      <%= search_form_for(@search, url: search_items_path, html: { method: :post }) do |f| %>
+
+        <div class="form-group">
+          <%= label_tag :q_m, 'Search For' %>
+          <%= f.combinator_select({}, class: 'form-control') %>
+        </div>
 
         <div class="form-group">
           <%= f.label :title_cont, 'Title' %>
@@ -18,11 +23,8 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :toy_type_eq, 'Type' %>
-          <%= f.select :toy_type_eq, options_for_select([['Book', 'book'],
-                                                    ['Clothing', 'clothing'],
-                                                    ['Cellphone', 'cellphone'],
-                                                    ['Computer', 'computer']], params[:q].try(:[], :toy_type_eq)),
+          <%= f.label :toy_type_id_eq, 'Type' %>
+          <%= f.select :toy_type_id_eq, options_for_select(@toy_types.map { |t| [t.title, t.id] }, params[:q].try(:[], :toy_type_id_eq)),
                        { include_blank: 'Any' },
                        { class: 'form-control' } %>
         </div>
@@ -56,8 +58,8 @@
 
         <% @items.each do |item| %>
           <h3>
-            <%= item.title %><br />
-            <small><%= item.toy_type %></small>
+            <%= link_to(item.title, item_path(item)) %><br />
+            <small><%= item.toy_type.title %></small>
           </h3>
           <p><%= item.description %></p>
         <% end %>

@@ -1,7 +1,7 @@
 Lostandfound::Application.routes.draw do
   resources :items do
     collection do
-      get 'search'
+      match 'search', via: [:get, :post]
     end
   end
 

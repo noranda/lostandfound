@@ -11,15 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310221541) do
+ActiveRecord::Schema.define(version: 20140318002040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "items", force: true do |t|
     t.string   "title"
+    t.text     "description"
+    t.text     "owner"
+    t.integer  "toy_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "toy_types", force: true do |t|
+    t.string   "title"
     t.string   "description"
-    t.string   "toy_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
